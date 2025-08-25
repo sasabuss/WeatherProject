@@ -10,7 +10,13 @@ class CityTemperatureController extends Controller
     public function preview()
     {
         $cities = CityTemperaturesModel::all();
-        return view('weather',compact('cities'));
+        return view('all-temperatures',compact('cities'));
 
+    }
+
+    public function delete(CityTemperaturesModel $city)
+    {
+        $city->delete();
+        return redirect('/admin/all-temperatures');
     }
 }
