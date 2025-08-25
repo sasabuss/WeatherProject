@@ -7,9 +7,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/all-temperatures', [CityTemperatureController::class,'preview']);
 
-Route::get('/admin/delete-city/{city}',[CityTemperatureController::class,'delete'])
-->name('delete-city');
+Route::middleware('auth')->prefix('/admin')->group(function () {
+
+    Route::get('/all-temperatures', [CityTemperatureController::class,'preview']);
+
+    Route::get('/delete-city/{city}',[CityTemperatureController::class,'delete'])
+        ->name('delete-city');
+
+    Route::get('/add-city',[CityTemperatureController::class,'index'])
+        ->name('add-city');
+
+    Route::post('/save-city', [CityTemperatureController::class, 'saveCity'])
+        ->name('save-city');
+
+
+});
+
 
 require __DIR__.'/auth.php';

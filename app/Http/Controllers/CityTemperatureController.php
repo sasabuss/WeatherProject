@@ -19,4 +19,24 @@ class CityTemperatureController extends Controller
         $city->delete();
         return redirect('/admin/all-temperatures');
     }
+
+    public function index()
+    {
+        return view('add-city');
+    }
+
+    public function saveCity(Request $request)
+    {
+       $request->validate([
+           'city' => 'required|string',
+           'temperature' => 'required|numeric',
+       ]);
+
+       CityTemperaturesModel::create([
+           'city' => $request->get('city'),
+           'temperature' => $request->get('temperature'),
+       ]);
+
+       return redirect('/admin/all-temperatures');
+    }
 }
