@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Couchbase\UserManager;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,24 +17,43 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        $amount = $this->command->ask('How many users would you like to create?', 20);
-        $password = $this->command->ask('What is your password?',123456);
-        $faker = Factory::create();
-        $this->command->getOutput()->progressStart($amount);
-
-
-        for ($i = 0; $i < $amount; $i++) {
-
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => Hash::make($password),
-            ]);
-
-            $this->command->getOutput()->progressAdvance();
-
+        $name = $this->command->ask('What is your name?');
+        if(empty($name)) {
+            $this->command->error('No name specified!');
+            return;
         }
-        $this->command->getOutput()->progressFinish();
+        $email = $this->command->ask('What is your email?');
+
+        if(empty($email)) {
+            $this->command->error('No email specified!');
+            return;
+        }
+
+        $password = $this->command->ask('What is your password?');
+        if(empty($password)) {
+
+            $this->command->error('No password specified!');
+            return;
+        }
+
+        $user = User::where('email', $email)->exists();
+        if($user instanceof User) {
+            $this->command->error("User already exists!");
+            return;
+        }
+
+        User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make('password'),
+        ]);
+        $this->command->info('User created successfully!');
+
     }
 
 }
+
+//if(User::where('email', $email)->exists()) {
+    //$this->command->error('User with this email already exists!');
+   // return;
+//}

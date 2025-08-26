@@ -21,10 +21,19 @@ class WeatherSeeder extends Seeder
         ];
 
         foreach ($weatherCast as $city => $temperature) {
+
+            if(WeatherModel::where('city', $city)->exists()) {
+                $this->command->error('City already exists');
+                continue;}
+
             WeatherModel::create([
                 'city' => $city,
                 'temperature' => $temperature,
             ]);
         }
-    }
+
+
+
+        }
+
 }

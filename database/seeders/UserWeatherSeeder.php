@@ -28,6 +28,11 @@ class UserWeatherSeeder extends Seeder
             return;
         }
 
+        if(WeatherModel::where('city', $city)->exists()) {
+            $this->command->error('City already exists');
+            return;
+        }
+
         WeatherModel::create([
             'city' => $city,
             'temperature' => $temperature,
