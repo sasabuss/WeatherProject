@@ -26,7 +26,7 @@
             <td>{{ $city->city }}</td>
             <td>{{ $city->temperature }} °C</td>
             <td>
-                <a class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{route('edit-city',['city'=> $city->id])}}" class="btn btn-sm btn-primary">Edit</a>
                 <a href="{{route('delete-city',['city'=> $city->id])}}" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>

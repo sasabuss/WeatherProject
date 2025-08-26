@@ -21,6 +21,12 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::post('/save-city', [CityTemperatureController::class, 'saveCity'])
         ->name('save-city');
 
+    Route::get('/edit-city/{city}',[CityTemperatureController::class,'edit'])
+    ->name('edit-city');
+
+    Route::post('/update-city/{city}',[CityTemperatureController::class,'update'])
+        ->name('update-city');
+
 
 });
 

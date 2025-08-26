@@ -39,4 +39,24 @@ class CityTemperatureController extends Controller
 
        return redirect('/admin/all-temperatures');
     }
+
+    public function edit(CityTemperaturesModel $city)
+    {
+        return view('edit-city',compact('city'));
+    }
+
+    public function update(Request $request,CityTemperaturesModel $city)
+    {
+        $request->validate([
+            'city' => 'required|string',
+            'temperature' => 'required|numeric',
+        ]);
+
+        $city->update([
+            'city' => $request->get('city'),
+            'temperature' => $request->get('temperature'),
+        ]);
+
+        return redirect('/admin/all-temperatures');
+    }
 }
