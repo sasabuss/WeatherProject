@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CityTemperaturesModel;
+use App\Models\WeatherModel;
 use Illuminate\Http\Request;
 
 class CityTemperatureController extends Controller
 {
     public function preview()
     {
-        $cities = CityTemperaturesModel::all();
+        $cities = WeatherModel::all();
         return view('all-temperatures',compact('cities'));
 
     }
 
-    public function delete(CityTemperaturesModel $city)
+    public function delete(WeatherModel $city)
     {
         $city->delete();
         return redirect('/admin/all-temperatures');
@@ -32,7 +32,7 @@ class CityTemperatureController extends Controller
            'temperature' => 'required|numeric',
        ]);
 
-       CityTemperaturesModel::create([
+       WeatherModel::create([
            'city' => $request->get('city'),
            'temperature' => $request->get('temperature'),
        ]);
@@ -40,12 +40,12 @@ class CityTemperatureController extends Controller
        return redirect('/admin/all-temperatures');
     }
 
-    public function edit(CityTemperaturesModel $city)
+    public function edit(WeatherModel $city)
     {
         return view('edit-city',compact('city'));
     }
 
-    public function update(Request $request,CityTemperaturesModel $city)
+    public function update(Request $request, WeatherModel $city)
     {
         $request->validate([
             'city' => 'required|string',
