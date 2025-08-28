@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CityTemperatureController;
+use App\Http\Controllers\ForecastController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,6 +30,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
 
 
 });
+
+Route::get('/forecast/{city}',[ForecastController::class,'index']);
 
 
 require __DIR__.'/auth.php';
