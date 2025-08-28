@@ -3,9 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Couchbase\UserManager;
-use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

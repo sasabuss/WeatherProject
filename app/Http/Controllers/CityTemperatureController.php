@@ -10,7 +10,7 @@ class CityTemperatureController extends Controller
     public function preview()
     {
         $cities = WeatherModel::all();
-        return view('all-temperatures',compact('cities'));
+        return view('all-temperatures', compact('cities'));
 
     }
 
@@ -27,22 +27,22 @@ class CityTemperatureController extends Controller
 
     public function saveCity(Request $request)
     {
-       $request->validate([
-           'city' => 'required|string',
-           'temperature' => 'required|numeric',
-       ]);
+        $request->validate([
+            'city' => 'required|string',
+            'temperature' => 'required|numeric',
+        ]);
 
-       WeatherModel::create([
-           'city' => $request->get('city'),
-           'temperature' => $request->get('temperature'),
-       ]);
+        WeatherModel::create([
+            'city' => $request->get('city'),
+            'temperature' => $request->get('temperature'),
+        ]);
 
-       return redirect('/admin/all-temperatures');
+        return redirect('/admin/all-temperatures');
     }
 
     public function edit(WeatherModel $city)
     {
-        return view('edit-city',compact('city'));
+        return view('edit-city', compact('city'));
     }
 
     public function update(Request $request, WeatherModel $city)
