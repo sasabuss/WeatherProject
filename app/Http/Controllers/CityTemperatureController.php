@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CitiesModel;
 use App\Models\WeatherModel;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class CityTemperatureController extends Controller
 {
     public function preview()
     {
-        $cities = WeatherModel::all();
+        $cities = CitiesModel::all();
         return view('all-temperatures', compact('cities'));
 
     }
