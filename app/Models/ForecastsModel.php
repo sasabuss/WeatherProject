@@ -9,4 +9,9 @@ class ForecastsModel extends Model
     protected $table = 'forecasts';
 
     protected $fillable = ['city_id','temprature','forecast_date'];
+
+    public function city()
+    {
+        return $this->hasOne(CitiesModel::class, 'id', 'city_id');
+    }
 }
