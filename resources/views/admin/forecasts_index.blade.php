@@ -1,4 +1,5 @@
-<form action="" method="POST">
+<form action="{{route('forecasts.store')}}" method="POST">
+    @csrf
 
     <select name="city_id">
         @foreach(\App\Models\CityModel::all() as $city)
