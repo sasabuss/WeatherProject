@@ -16,11 +16,9 @@ Route::get('/prognoza',[WeatherController::class,'index']);
 Route::get('/forecast/{city:name}',[FOrecastController::class,'index']);
 
 
-Route::get('/admin/weather', function () {
-    return view('weather');
-});
-
+Route::view('/admin/weather', 'admin.weather');
 Route::post('/admin/weather/upadte',[AdminWeatherController::class,'update'])->name('weather.update');
+Route::view('/admin/forecasts', 'admin.forecasts_index');
 
 
 require __DIR__.'/auth.php';

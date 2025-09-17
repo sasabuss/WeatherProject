@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CityModel;
 use App\Models\ForecastsModel;
+use App\Models\WeatherModel;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -15,13 +16,14 @@ class ForecastsSeeder extends Seeder
     public function run(): void
     {
         $cities = CityModel::all();
-        $weather = ['rainy','snowy','sunny'];
+        $weathers = ForecastsModel::WEATHER;
+
 
 
         foreach ($cities as $city) {
             for($i = 1; $i <= 5; $i++) {
 
-                $type = $weather[array_rand($weather)];
+                $type = $weathers[array_rand($weathers)];
 
                 if($type === 'snowy' || $type === 'rainy')
                 {
